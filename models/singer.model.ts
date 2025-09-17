@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-const topicSchema = new mongoose.Schema(
+const singerSchema = new mongoose.Schema(
   {
-    title: String,
+    fullName: String,
     avatar: String,
-    description: String,
     status: String,
     slug: String,
     deleted: {
@@ -16,5 +15,5 @@ const topicSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Topic = mongoose.model("Topic", topicSchema, "topics");
-export default Topic;
+const Singer = mongoose.model("Singer", singerSchema, "singers");
+export default Singer;
