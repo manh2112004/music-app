@@ -1,0 +1,187 @@
+/* Header */
+header.header {
+  background: #343a40;
+  padding: 10px 0;
+  position: relative;
+}
+
+header.header .inner-logo img {
+  max-height: 60px;
+}
+
+header.header .inner-menu {
+  text-align: right;
+}
+
+header.header .inner-menu ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-wrap: wrap; /* Cho phép tự xuống hàng nếu tràn */
+}
+
+header.header .inner-menu ul li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+header.header .inner-menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+header.header .inner-menu ul li a:hover {
+  color: #ffc107;
+}
+
+/* Hamburger button (ẩn trên desktop) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+/* Footer */
+footer.footer {
+  background: #343a40;
+  color: #ddd;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+footer.footer a {
+  color: #ffc107;
+  text-decoration: none;
+}
+
+footer.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Container spacing */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Utility */
+.inner-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.box-head {
+  border-bottom: 2px solid #ffc107;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  header.header .inner-menu {
+    display: none; /* ẩn menu mặc định */
+    text-align: left;
+    background: #343a40;
+    padding: 10px 20px;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+  }
+
+  header.header .inner-menu.active {
+    display: block; /* hiện khi toggle */
+  }
+
+  header.header .inner-menu ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .menu-toggle {
+    display: block; /* hiện hamburger */
+  }
+}
+/* end header */
+/* topics */
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card-body {
+  padding: 15px;
+  flex: 1; /* đẩy nút xuống cuối */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #666;
+  flex: 1;
+}
+
+.card .btn {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .card img {
+    height: 150px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-text {
+    font-size: 13px;
+  }
+}
+/* end topics */
