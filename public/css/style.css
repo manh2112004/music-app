@@ -245,10 +245,15 @@ footer.footer a:hover {
   align-items: center;
   gap: 6px;
 }
+/* Icon mặc định: xám */
+.singer-detail .inner-like i {
+  color: #555;
+}
 
-/* Icon */
-.song-item i {
+/* Khi active thì icon xanh và đậm */
+.singer-detail .inner-like.active i {
   color: #007bff;
+  font-weight: 900;
 }
 
 /* Responsive Grid */
@@ -269,3 +274,131 @@ footer.footer a:hover {
   }
 }
 /* end list bài hát */
+/* chi tiết bài hát  */
+.singer-detail {
+  background: #fff;
+  padding: 20px 0;
+}
+
+/* Tiêu đề */
+.singer-detail .inner-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Actions */
+.singer-detail .inner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.singer-detail .inner-action {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.singer-detail .inner-action i {
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Khu vực play */
+.singer-detail .inner-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+/* Avatar nhạc */
+.singer-detail .inner-avatar {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #eee;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.singer-detail .inner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  animation-name: rotateAvatar;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-play-state: paused;
+}
+
+/* Avatar quay */
+@keyframes rotateAvatar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Audio */
+.singer-detail .inner-audio {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Mô tả & lyrics */
+.singer-detail .inner-desc {
+  margin-bottom: 20px;
+}
+
+.singer-detail .inner-label {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.singer-detail .inner-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  white-space: pre-line; /* xuống dòng đúng với lyrics */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .singer-detail .inner-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .singer-detail .inner-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .singer-detail .inner-audio {
+    max-width: 100%;
+  }
+
+  .singer-detail .inner-title {
+    font-size: 18px;
+  }
+}
+/* end chi tiết bài hát */
