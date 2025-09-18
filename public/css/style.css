@@ -311,7 +311,16 @@ footer.footer a:hover {
   color: #007bff;
   cursor: pointer;
 }
-
+/* Icon mặc định: xám */
+.singer-detail .inner-heart i {
+  color: #555;
+  transition: color 0.3s, transform 0.2s;
+}
+.singer-detail .inner-heart.active i {
+  color: #e63946;
+  font-weight: 900;
+  transform: scale(1.2); /* hơi lớn lên khi active */
+}
 /* Khu vực play */
 .singer-detail .inner-play {
   display: flex;
