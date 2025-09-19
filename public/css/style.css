@@ -230,11 +230,18 @@ footer.footer a:hover {
   color: #111;
   text-decoration: none;
 }
-
+.song-item .inner-content .inner-heart {
+  cursor: pointer;
+}
 .song-item .inner-title a:hover {
   color: #007bff;
 }
-
+.song-item .inner-content .inner-heart.active {
+  color: red;
+}
+.song-item .inner-content .inner-heart.active i {
+  font-weight: 900;
+}
 /* Thông tin phụ */
 .song-item .inner-singer,
 .song-item .inner-like,
