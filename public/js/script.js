@@ -1,13 +1,13 @@
 // menu trên mobile
-document.addEventListener("DOMContentLoaded", function () {
-  const menuToggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".inner-menu");
-  if (menuToggle && menu) {
-    menuToggle.addEventListener("click", () => {
-      menu.classList.toggle("active");
-    });
-  }
-});
+const menuToggle = document.querySelector(".menu-toggle");
+const innerMenu = document.querySelector("header.header .inner-menu");
+const boxSearch = document.querySelector("header.header .box-search");
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    innerMenu.classList.toggle("active");
+    boxSearch.classList.toggle("active");
+  });
+}
 
 // end menu trên mobile
 // APlayer
@@ -84,3 +84,38 @@ if (listButtonFavorite.length > 0) {
   });
 }
 // end button favorite
+
+// search Suggest
+const boxSearchSuggest = document.querySelector(".box-search");
+if (boxSearchSuggest) {
+  const input = boxSearchSuggest.querySelector("input[name='keyword']");
+  const boxSuggest = boxSearchSuggest.querySelector(".inner-suggest");
+  input.addEventListener("keyup", () => {
+    const keyword = input.value;
+    const link = `/search/suggest?keyword=${keyword}`;
+    fetch(link)
+      .then((res) => res.json())
+      .then((data) => {
+        const songs = data.songs;
+        if (songs.length > 0) {
+          boxSuggest.classList.add("show");
+          const htmls = songs.map((song) => {
+            return `
+                <a class="inner-item" href="/songs/detail/${song.slug}">
+                    <div class="inner-image"><img src="${song.avatar}"></div>
+                    <div class="inner-info">
+                        <div class="inner-title">${song.title}</div>
+                        <div class="inner-singer"><i class="fa-solid fa-microphone-lines"></i>${song.infoSinger.fullName}</div>
+                    </div>
+                </a>
+            `;
+          });
+          const boxList = boxSearchSuggest.querySelector(".inner-list");
+          boxList.innerHTML = htmls.join("");
+        } else {
+          boxSuggest.classList.remove("show");
+        }
+      });
+  });
+}
+// end search Suggest
