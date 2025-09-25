@@ -1,0 +1,579 @@
+/* Header */
+header.header {
+  background: #343a40;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;/
+}
+body {
+  padding-top: 80px; /* đúng bằng hoặc lớn hơn chiều cao header */
+}
+
+header.header .inner-logo img {
+  max-height: 60px;
+}
+
+header.header .inner-menu {
+  text-align: right;
+}
+
+header.header .inner-menu ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+header.header .inner-menu ul li {
+  display: inline-block;
+}
+
+header.header .inner-menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+header.header .inner-menu ul li a:hover {
+  color: #ffc107;
+}
+
+/* Hamburger button (ẩn trên desktop) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  /* Ẩn menu và search mặc định */
+  header.header .inner-menu,
+  header.header .box-search {
+    display: none;
+    background: #343a40;
+    padding: 10px 20px;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+  }
+
+  /* Hiện khi active */
+  header.header .inner-menu.active,
+  header.header .box-search.active {
+    display: block;
+  }
+
+  header.header .inner-menu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  header.header .inner-menu ul li {
+    display: block;
+    margin: 0;
+  }
+
+  .menu-toggle {
+    display: block; /* hiện hamburger */
+  }
+}
+/* end header */
+/* Menu */
+header.header .inner-menu {
+  text-align: right;
+}
+
+header.header .inner-menu ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+header.header .inner-menu ul li {
+  list-style: none;
+}
+
+header.header .inner-menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+header.header .inner-menu ul li a:hover {
+  color: #ffc107;
+}
+
+/* Hamburger button (ẩn desktop) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+/* Footer */
+footer.footer {
+  background: #343a40;
+  color: #ddd;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+footer.footer a {
+  color: #ffc107;
+  text-decoration: none;
+}
+
+footer.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  /* Search thu gọn bớt padding */
+  header.header .box-search input.form-control {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  header.header .box-search button {
+    padding: 6px 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Bố cục mobile */
+  header.header .container .row {
+    align-items: center;
+  }
+
+  header.header .box-search {
+    margin-top: 10px;
+  }
+
+  header.header .inner-menu {
+    display: none; /* ẩn menu mặc định */
+    text-align: left;
+    background: #343a40;
+    padding: 15px 20px;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+  }
+
+  header.header .inner-menu.active {
+    display: block; /* hiện khi toggle */
+  }
+
+  header.header .inner-menu ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .menu-toggle {
+    display: block; /* hiện hamburger */
+  }
+}
+/* topics */
+.card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card-body {
+  padding: 15px;
+  flex: 1; /* đẩy nút xuống cuối */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #666;
+  flex: 1;
+}
+
+.card .btn {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .card img {
+    height: 150px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-text {
+    font-size: 13px;
+  }
+}
+/* end topics */
+/* list bài hát  */
+.song-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 12px;
+  transition: box-shadow 0.3s;
+  height: 100%;
+}
+
+.song-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hình ảnh */
+.song-item .inner-image {
+  flex: 0 0 90px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.song-item .inner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nội dung */
+.song-item .inner-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.song-item .inner-title a {
+  font-size: 15px;
+  font-weight: bold;
+  color: #111;
+  text-decoration: none;
+}
+.song-item .inner-content .inner-heart {
+  cursor: pointer;
+}
+.song-item .inner-title a:hover {
+  color: #007bff;
+}
+.song-item .inner-content .inner-heart.active {
+  color: red;
+}
+.song-item .inner-content .inner-heart.active i {
+  font-weight: 900;
+}
+/* Thông tin phụ */
+.song-item .inner-singer,
+.song-item .inner-like,
+.song-item .inner-time {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Icon mặc định: xám */
+.singer-detail .inner-like i {
+  color: #555;
+}
+
+/* Khi active thì icon xanh và đậm */
+.singer-detail .inner-like.active i {
+  color: #007bff;
+  font-weight: 900;
+}
+
+/* Responsive Grid */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.col-6 {
+  padding: 10px;
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  .col-6 {
+    width: 100%;
+  }
+}
+/* end list bài hát */
+/* chi tiết bài hát  */
+.singer-detail {
+  background: #fff;
+  padding: 20px 0;
+}
+
+/* Tiêu đề */
+.singer-detail .inner-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Actions */
+.singer-detail .inner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.singer-detail .inner-action {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.singer-detail .inner-action i {
+  color: #007bff;
+  cursor: pointer;
+}
+/* Icon mặc định: xám */
+.singer-detail .inner-heart i {
+  color: #555;
+  transition: color 0.3s, transform 0.2s;
+}
+.singer-detail .inner-heart.active i {
+  color: #e63946;
+  font-weight: 900;
+  transform: scale(1.2); /* hơi lớn lên khi active */
+}
+/* Khu vực play */
+.singer-detail .inner-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+/* Avatar nhạc */
+.singer-detail .inner-avatar {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #eee;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.singer-detail .inner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  animation-name: rotateAvatar;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-play-state: paused;
+}
+
+/* Avatar quay */
+@keyframes rotateAvatar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Audio */
+.singer-detail .inner-audio {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Mô tả & lyrics */
+.singer-detail .inner-desc {
+  margin-bottom: 20px;
+}
+
+.singer-detail .inner-label {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.singer-detail .inner-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  white-space: pre-line; /* xuống dòng đúng với lyrics */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .singer-detail .inner-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .singer-detail .inner-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .singer-detail .inner-audio {
+    max-width: 100%;
+  }
+
+  .singer-detail .inner-title {
+    font-size: 18px;
+  }
+}
+/* end chi tiết bài hát */
+/* box-search */
+.box-search {
+  position: relative;
+}
+
+.box-search .inner-suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  z-index: 1;
+  overflow-y: auto;
+  display: none;
+}
+
+.box-search .inner-suggest.show {
+  display: block;
+}
+
+.box-search .inner-suggest .inner-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.box-search .inner-suggest .inner-item:hover {
+  background: #efefef;
+  text-decoration: none;
+}
+
+.box-search .inner-suggest .inner-item:last-child {
+  border-bottom: 0;
+}
+
+.box-search .inner-suggest .inner-item .inner-image {
+  width: 60px;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.box-search .inner-suggest .inner-item .inner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.box-search .inner-suggest .inner-item .inner-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.box-search .inner-suggest .inner-item .inner-info .inner-title {
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4d007d;
+}
+
+.box-search .inner-suggest .inner-item .inner-info .inner-singer {
+  font-size: 13px;
+  font-weight: 500;
+  color: #282828;
+  margin-bottom: 2px;
+}
+/* End box-search */
