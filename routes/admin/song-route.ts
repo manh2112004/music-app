@@ -27,6 +27,5 @@ router.patch(
   ]),
   uploadFields,
   controller.editPatch
-
 );
 export const songRoutes: Router = router;
