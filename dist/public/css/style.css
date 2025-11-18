@@ -577,3 +577,97 @@ footer.footer a:hover {
   margin-bottom: 2px;
 }
 /* End box-search */
+/* trang chủ */
+/* Banner */
+.banner {
+    background: #1c1c1c;
+    color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+.banner h1 {
+    font-weight: 700;
+}
+.banner p {
+    opacity: 0.8;
+}
+
+/* Topic slider */
+.topic-slider {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.topic-slider::-webkit-scrollbar {
+    height: 6px;
+}
+.topic-slider::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+.topic-item {
+    min-width: 200px;
+    cursor: pointer;
+}
+.topic-item .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.topic-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+.topic-item h6 {
+    font-weight: 600;
+}
+
+/* Singer list */
+.singer-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.singer-item {
+    width: 140px;
+    text-align: center;
+    margin: 8px;
+}
+.singer-item .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+    border: 3px solid #eee;
+}
+.singer-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Song cards */
+.song-card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.song-card img {
+    height: 160px;
+    object-fit: cover;
+    border-radius: 14px 14px 0 0;
+}
+.song-card h5 {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-listen {
+    border-radius: 20px !important;
+}

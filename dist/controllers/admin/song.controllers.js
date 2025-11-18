@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.editPatch = exports.edit = exports.createPost = exports.create = exports.index = void 0;
+exports.deleteSong = exports.detail = exports.editPatch = exports.edit = exports.createPost = exports.create = exports.index = void 0;
 const song_model_1 = __importDefault(require("../../models/song.model"));
 const topic_model_1 = __importDefault(require("../../models/topic.model"));
 const singer_model_1 = __importDefault(require("../../models/singer.model"));
@@ -21,9 +21,16 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const songs = yield song_model_1.default.find({
         deleted: false,
     }).sort({ createdAt: "descending" });
+    const singers = yield singer_model_1.default.find();
+    const topics = yield topic_model_1.default.find();
+    const songsWithSinger = songs.map((song) => {
+        const singer = singers.find((s) => s._id.equals(song.singerId));
+        const topic = topics.find((t) => t._id.equals(song.topicId));
+        return Object.assign(Object.assign({}, song.toObject()), { singerName: singer ? singer.fullName : "chưa có ca sĩ", topicName: topic ? topic.title : "chưa có danh mục" });
+    });
     res.render("admin/pages/songs/index.pug", {
         pageTitle: "Trang quản lý bài hát",
-        songs: songs,
+        songs: songsWithSinger,
     });
 });
 exports.index = index;
@@ -109,3 +116,34 @@ const editPatch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect(`${config_1.systemConfig.prefixAdmin}/songs/edit/${id}`);
 });
 exports.editPatch = editPatch;
+const detail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const song = yield song_model_1.default.findOne({ _id: id });
+    const topic = yield topic_model_1.default.findById(song.topicId).select("title");
+    const singer = yield singer_model_1.default.findById(song.singerId).select("fullName");
+    const songDetail = song.toObject();
+    songDetail.nameTopic = topic ? topic.title : "Chưa có chủ đề";
+    songDetail.nameSinger = singer ? singer.fullName : "Chưa có ca sĩ";
+    res.render("admin/pages/songs/detail.pug", {
+        pageTile: "Trang chi tiết bài hát",
+        song: songDetail,
+    });
+});
+exports.detail = detail;
+const deleteSong = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        yield song_model_1.default.updateOne({ _id: id }, { deleted: true });
+        res.json({
+            code: 200,
+            message: "Xoá bài hát thành công",
+        });
+    }
+    catch (error) {
+        res.json({
+            code: 400,
+            message: "Xoá bài hát không thành công",
+        });
+    }
+});
+exports.deleteSong = deleteSong;

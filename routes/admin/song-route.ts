@@ -8,6 +8,7 @@ import {
 const router: Router = express.Router();
 const upload = multer();
 router.get("/", controller.index);
+router.get("/detail/:id", controller.detail);
 router.get("/create", controller.create);
 router.post(
   "/create",
@@ -28,4 +29,5 @@ router.patch(
   uploadFields,
   controller.editPatch
 );
+router.get("/delete/:id", controller.deleteSong);
 export const songRoutes: Router = router;

@@ -44,6 +44,7 @@ const uploadCloud_middleware_1 = require("../../middlewares/admin/uploadCloud.mi
 const router = express_1.default.Router();
 const upload = (0, multer_1.default)();
 router.get("/", controller.index);
+router.get("/detail/:id", controller.detail);
 router.get("/create", controller.create);
 router.post("/create", upload.fields([
     { name: "avatar", maxCount: 1 },
@@ -54,4 +55,5 @@ router.patch("/edit/:idSong", upload.fields([
     { name: "avatar", maxCount: 1 },
     { name: "audio", maxCount: 1 },
 ]), uploadCloud_middleware_1.uploadFields, controller.editPatch);
+router.get("/delete/:id", controller.deleteSong);
 exports.songRoutes = router;

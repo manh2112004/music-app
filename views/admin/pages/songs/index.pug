@@ -22,9 +22,8 @@ block main
                         th STT
                         th Hình ảnh
                         th Tiêu đề
-                        //- th Ca sĩ
-                        //- th Chủ đề
-                        //- th Vị trí
+                        th Ca sĩ
+                        th Chủ đề
                         th Trạng thái
                         th Hành động
 
@@ -40,9 +39,8 @@ block main
                                     height="60px"
                                 )
                             td #{item.title}
-                            //- td Dữ liệu ca sĩ
-                            //- td Dữ liệu chủ đề
-                            //- td Dữ liệu vị trí
+                            td #{item.singerName}
+                            td #{item.topicName}
                             td
                                 if (item.status === "active")
                                     a(
@@ -57,14 +55,16 @@ block main
                             td
                                 a(
                                     class="btn btn-secondary btn-sm"
-                                    href=`${prefixAdmin}/songs/detail/${item.id}`
+                                    href=`${prefixAdmin}/songs/detail/${item._id}`
                                 ) Chi tiết
                                 a(
                                     class="btn btn-warning btn-sm ml-1"
-                                    href=`${prefixAdmin}/songs/edit/${item.id}`
+                                    href=`${prefixAdmin}/songs/edit/${item._id}`
                                 ) Sửa
                                 button(
                                     class="btn btn-danger btn-sm ml-1"
                                     button-delete
-                                    data-id=item.id
+                                    data-id=item._id
                                 ) Xóa
+    block scripts
+        script(src="/admin/js/song.js")

@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import * as controller from "../../controllers/admin/topic.controllers";
+import * as controller from "../../controllers/admin/singer.controllers";
 import { uploadSingle } from "../../middlewares/admin/uploadCloud.middleware";
 import multer from "multer";
 const upload = multer();
@@ -12,13 +12,12 @@ router.post(
   uploadSingle,
   controller.createPost
 );
-router.get("/delete/:id", controller.deleteTopic);
-router.get("/detail/:id", controller.detail);
 router.get("/edit/:id", controller.edit);
 router.patch(
-  "/editPatch/:id",
+  "/editPost/:id",
   upload.single("avatar"),
   uploadSingle,
-  controller.editPatch
+  controller.editPost
 );
-export const topicRoutes: Router = router;
+router.get("/delete/:id", controller.deleteSinger);
+export const singerRoutes: Router = router;

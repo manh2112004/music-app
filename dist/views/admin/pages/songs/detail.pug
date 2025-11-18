@@ -1,0 +1,35 @@
+extends ../../layout/default.pug
+block main
+    .song-detail
+        .song-header
+            img(src=song.avatar, alt=song.title)
+            .song-info
+                h2 #{song.title}
+                p
+                    strong Ca sĩ: 
+                    | #{song.nameSinger}
+                p
+                    strong Chủ đề: 
+                    | #{song.nameTopic}
+                .stats
+                    span
+                        i(class="fas fa-heart")
+                        | #{song.like} lượt thích
+                    span
+                        i(class="fas fa-headphones")
+                        | #{song.listen} lượt nghe
+                p
+                    small.text-muted Cập nhật: #{new Date(song.updatedAt).toLocaleString('vi-VN')}
+
+        .song-description
+            h5 Mô tả
+            div!= song.description
+
+        audio(controls)
+            source(src=song.audio, type="audio/mpeg")
+            | Trình duyệt của bạn không hỗ trợ phát âm thanh.
+
+        .lyrics
+            h5 Lời bài hát
+            pre!= song.lyrics
+

@@ -8,9 +8,20 @@ export const index = async (req: Request, res: Response) => {
   const songs = await Song.find({
     deleted: false,
   }).sort({ createdAt: "descending" });
+  const singers = await Singer.find();
+  const topics = await Topic.find();
+  const songsWithSinger = songs.map((song) => {
+    const singer = singers.find((s) => s._id.equals(song.singerId));
+    const topic = topics.find((t) => t._id.equals(song.topicId));
+    return {
+      ...song.toObject(),
+      singerName: singer ? singer.fullName : "chưa có ca sĩ",
+      topicName: topic ? topic.title : "chưa có danh mục",
+    };
+  });
   res.render("admin/pages/songs/index.pug", {
     pageTitle: "Trang quản lý bài hát",
-    songs: songs,
+    songs: songsWithSinger,
   });
 };
 // GET /songs/create
@@ -102,4 +113,32 @@ export const editPatch = async (req: Request, res: Response) => {
     dataSong
   );
   res.redirect(`${systemConfig.prefixAdmin}/songs/edit/${id}`);
+};
+export const detail = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const song = await Song.findOne({ _id: id });
+  const topic = await Topic.findById(song.topicId).select("title");
+  const singer = await Singer.findById(song.singerId).select("fullName");
+  const songDetail = song.toObject() as any;
+  songDetail.nameTopic = topic ? topic.title : "Chưa có chủ đề";
+  songDetail.nameSinger = singer ? singer.fullName : "Chưa có ca sĩ";
+  res.render("admin/pages/songs/detail.pug", {
+    pageTile: "Trang chi tiết bài hát",
+    song: songDetail,
+  });
+};
+export const deleteSong = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    await Song.updateOne({ _id: id }, { deleted: true });
+    res.json({
+      code: 200,
+      message: "Xoá bài hát thành công",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Xoá bài hát không thành công",
+    });
+  }
 };

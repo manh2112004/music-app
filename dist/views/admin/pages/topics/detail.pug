@@ -1,0 +1,38 @@
+extends ../../layout/default.pug
+block styles
+    style.
+        .topic-detail {
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .topic-detail img {
+            max-width: 200px;
+            border-radius: 5px;
+        }
+        .topic-detail h2 {
+            margin-top: 0;
+        }
+
+block main
+    .container-fluid
+        .topic-detail
+            .row
+                .col-md-4
+                    img(src=topic.avatar, alt=topic.title)
+                .col-md-8
+                    h2 #{topic.title}
+                    p
+                        strong Mô tả: 
+                        | #{topic.description}
+                    p
+                        strong Slug: 
+                        | #{topic.slug}
+                    p
+                        strong Trạng thái: 
+                        if topic.status === 'active'
+                            span.text-success Hoạt động
+                        else
+                            span.text-danger Không hoạt động
+            a.btn.btn-primary.mt-3(href='/admin/topics') Quay lại danh sách
