@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listen = exports.favorite = exports.like = exports.detail = exports.list = void 0;
+exports.nextSong = exports.miniPlayer = exports.listen = exports.favorite = exports.like = exports.detail = exports.list = void 0;
 const topic_model_1 = __importDefault(require("../../models/topic.model"));
 const song_model_1 = __importDefault(require("../../models/song.model"));
 const singer_model_1 = __importDefault(require("../../models/singer.model"));
@@ -148,3 +148,28 @@ const listen = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     });
 });
 exports.listen = listen;
+const miniPlayer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const song = yield song_model_1.default.findOne({ slug: req.params.slug, deleted: false });
+        const singer = yield singer_model_1.default.findById(song.singerId);
+        res.json({
+            code: 200,
+            title: song.title,
+            singerName: (singer === null || singer === void 0 ? void 0 : singer.fullName) || "Unknown",
+            audio: song.audio,
+            avatar: song.avatar,
+            lyrics: song.lyrics,
+        });
+    }
+    catch (error) {
+        res.json({
+            code: 400,
+            message: "Lỗi",
+        });
+    }
+});
+exports.miniPlayer = miniPlayer;
+const nextSong = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const slug = req.params.slug;
+});
+exports.nextSong = nextSong;

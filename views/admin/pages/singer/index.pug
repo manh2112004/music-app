@@ -23,8 +23,12 @@ block main
                         each singer, index in singers
                             tr.text-center
                                 td #{index + 1}
-                                td
-                                    img(src=singer.avatar, alt=singer.fullName, width="70", height="70", class="rounded-circle border")
+                                if(singer.avatar)
+                                    td
+                                        img(src=singer.avatar, alt=singer.fullName, width="70", height="70", class="rounded-circle border")
+                                else
+                                    td
+                                        img(src="https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-9.png", alt=singer.fullName, width="70", height="70", class="rounded-circle border")
                                 td #{singer.fullName}
                                 td 
                                     if singer.status === "active"

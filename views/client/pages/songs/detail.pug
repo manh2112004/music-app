@@ -1,6 +1,5 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
-
 block main
     .singer-detail
         .container.my-3
@@ -22,7 +21,6 @@ block main
                             span #{song.like} thích
                         div(class=("inner-action inner-heart " + (song.isFavoriteSong ? "active" : "")) button-favorite=song.id)
                             <i class="fa-regular fa-heart"></i> Bài hát yêu thích
-
                     .inner-play
                         .inner-avatar
                             img(src=song.avatar)

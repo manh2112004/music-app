@@ -4,7 +4,6 @@ block main
         .banner.mb-4
             h1.mb-2 Music - Nghe Nhạc Trực Tuyến
             p Thế giới âm nhạc dành cho bạn
-        //- TOPICS
         h2.mt-4.mb-3.text-primary Chủ đề nổi bật
         .topic-slider
             each topic in topics
@@ -15,7 +14,6 @@ block main
                         .card-body.p-2
                             h6.mt-1 #{topic.title}
         hr
-        //- SINGERS
         h2.mt-4.mb-3.text-primary Ca sĩ yêu thích
         .singer-list
             each singer in singers
@@ -23,9 +21,10 @@ block main
                     .avatar
                         if singer.avatar
                             img(src=singer.avatar, alt=singer.fullName)
+                        else
+                            img(src="https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-9.png", alt=singer.fullName)
                     h6.mt-2 #{singer.fullName}
         hr
-        //- SONGS
         h2.mt-4.mb-3.text-primary Bài hát mới phát hành
         .row
             each song in songs
@@ -37,4 +36,4 @@ block main
                             h5.card-title #{song.title}
                             small.text-muted #{song.listen} lượt nghe
                             br
-                            a.btn.btn-primary.btn-sm.mt-2.btn-listen(href=`/songs/${song.slug}`) ▶ Nghe ngay
+                            button.btn.btn-primary.btn-sm.mt-2(onclick=`playSong('${song.slug}')`) ▶ Nghe ngay

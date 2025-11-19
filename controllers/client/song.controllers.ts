@@ -139,3 +139,25 @@ export const listen = async (req: Request, res: Response) => {
     listen: songNew.listen,
   });
 };
+export const miniPlayer = async (req: Request, res: Response) => {
+  try {
+    const song = await Song.findOne({ slug: req.params.slug, deleted: false });
+    const singer = await Singer.findById(song.singerId);
+    res.json({
+      code: 200,
+      title: song.title,
+      singerName: singer?.fullName || "Unknown",
+      audio: song.audio,
+      avatar: song.avatar,
+      lyrics: song.lyrics,
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Lỗi",
+    });
+  }
+};
+export const nextSong = async (req: Request, res: Response) => {
+  const slug = req.params.slug;
+};

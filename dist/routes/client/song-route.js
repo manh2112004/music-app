@@ -40,6 +40,8 @@ exports.songRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const controller = __importStar(require("../../controllers/client/song.controllers"));
 const router = express_1.default.Router();
+router.get("/miniPlayer/:slug", controller.miniPlayer);
+router.get("/next/:slug", controller.nextSong);
 router.get("/:slug", controller.list);
 router.get("/detail/:slugSong", controller.detail);
 router.patch("/like/:typeLike/:idSong", controller.like);

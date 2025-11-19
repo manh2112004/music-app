@@ -1,6 +1,8 @@
 import express, { Router } from "express";
 import * as controller from "../../controllers/client/song.controllers";
 const router: Router = express.Router();
+router.get("/miniPlayer/:slug", controller.miniPlayer);
+router.get("/next/:slug", controller.nextSong);
 router.get("/:slug", controller.list);
 router.get("/detail/:slugSong", controller.detail);
 router.patch("/like/:typeLike/:idSong", controller.like);

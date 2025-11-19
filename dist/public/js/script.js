@@ -8,7 +8,6 @@ if (menuToggle) {
     boxSearch.classList.toggle("active");
   });
 }
-
 // end menu trên mobile
 // APlayer
 const aplayer = document.querySelector("#aplayer");
