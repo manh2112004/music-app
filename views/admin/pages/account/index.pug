@@ -3,7 +3,7 @@ block main
     .container-fluid
         .d-flex.justify-content-between.align-items-center.mb-4
             h3.mb-0 Quản lý tài khoản Admin
-            a.btn.btn-primary(href="/admin/account/create")
+            a.btn.btn-primary(href="/admin/accounts/create")
                 i.fa.fa-plus.mr-1
                 | Thêm mới
 
@@ -32,7 +32,12 @@ block main
                                     else
                                         span.badge.badge-secondary Tạm khóa
                                 td
-                                    a.btn.btn-sm.btn-info.mr-1(href=`/admin/account/edit/${account._id}`)
+                                    a.btn.btn-sm.btn-info.mr-1(href=`/admin/accounts/edit/${account._id}`)
                                         i.fa.fa-edit
-                                    a.btn.btn-sm.btn-danger(href=`/admin/account/delete/${account._id}`)
+                                    button.btn.btn-sm.btn-danger(
+                                        button-delete
+                                        delete-account-id=account._id
+                                    )
                                         i.fa.fa-trash
+block scripts
+    script(src="/admin/js/account.js")

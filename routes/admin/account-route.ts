@@ -13,4 +13,12 @@ router.post(
   controller.createPost
 );
 router.get("/profile", controller.profile);
+router.patch("/delete/:id", controller.deleteAccount);
+router.get("/edit/:id", controller.edit);
+router.post(
+  "/editPost/:id",
+  upload.single("avatar"),
+  uploadSingle,
+  controller.editPost
+);
 export const accountRoutes: Router = router;

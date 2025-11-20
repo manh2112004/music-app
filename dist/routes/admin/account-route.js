@@ -47,4 +47,7 @@ router.get("/", controller.index);
 router.get("/create", controller.create);
 router.post("/createPost", upload.single("avatar"), uploadCloud_middleware_1.uploadSingle, controller.createPost);
 router.get("/profile", controller.profile);
+router.patch("/delete/:id", controller.deleteAccount);
+router.get("/edit/:id", controller.edit);
+router.post("/editPost/:id", upload.single("avatar"), uploadCloud_middleware_1.uploadSingle, controller.editPost);
 exports.accountRoutes = router;
