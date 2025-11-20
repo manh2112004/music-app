@@ -1,3 +1,73 @@
 extends ../../layout/default.pug
+
+block styles
+    link(rel="stylesheet", href="/admin/css/dashboard.css")
 block main
-    h1 Trang tổng quan
+    .container-fluid.mt-4
+        h1.mb-4 #{pageTitle}
+        .row
+            .col-md-4
+                .card.text-white.bg-primary.mb-3
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .info
+                                h5 Tổng số bài hát
+                                h3 #{songs.length}
+                            i.fas.fa-music.fa-3x
+            .col-md-4
+                .card.text-white.bg-success.mb-3
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .info
+                                h5 Tổng số ca sĩ
+                                h3 #{singers.length}
+                            i.fas.fa-user.fa-3x
+            .col-md-4
+                .card.text-white.bg-warning.mb-3
+                    .card-body
+                        .d-flex.justify-content-between.align-items-center
+                            .info
+                                h5 Tổng số chủ đề
+                                h3 #{topics.length}
+                            i.fas.fa-book.fa-3x
+
+        //- Biểu đồ lượt nghe & lượt thích
+        .card.mt-4
+            .card-header
+                h5 Thống kê lượt nghe & lượt thích theo ca sĩ
+            .card-body
+                .chart-container
+                    canvas#chartSingers
+
+        //- Bảng bài hát mới nhất
+        .card.mt-4
+            .card-header
+                h5 Bài hát mới nhất
+            .card-body
+                table.table.table-striped.table-hover
+                    thead
+                        tr
+                            th Tiêu đề
+                            th Ca sĩ
+                            th Chủ đề
+                            th Lượt nghe
+                            th Lượt thích
+                            th Ngày tạo
+                    tbody
+                        each song in songs
+                            - const singer = singers.find(s => s._id.toString() === song.singerId) || {}
+                            - const topic = topics.find(t => t._id.toString() === song.topicId) || {}
+                            tr
+                                td #{song.title}
+                                td #{singer.fullName || 'N/A'}
+                                td #{topic.title || 'N/A'}
+                                td #{song.listen}
+                                td #{song.like}
+                                td #{new Date(song.createdAt).toLocaleDateString()}
+
+block scripts
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script.
+        const songsData = !{JSON.stringify(songs)};
+        const singersData = !{JSON.stringify(singers)};
+    script(src="/admin/js/dashboard.js")

@@ -2,21 +2,19 @@ doctype html
 html
     head
         title #{pageTitle}
-
         link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
-        //- css chung
-        link(rel="stylesheet",href="/admin/css/style.css")
-        //- block cho css riêng
+        link(rel="stylesheet", href="/admin/css/style.css")
         block styles
+
     body
         include ../partials/header.pug
         .body
             include ../partials/sider.pug
             .main
                 block main
-            script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js") 
-            script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js") 
-            script(src="https://cdn.tiny.cloud/1/s5hj5w9txuxkc2x0p70oeahr2din8pi92lwyl7z688l665p4/tinymce/6/tinymce.min.js" referrerpolicy="origin")
-            script(src="/admin/js/tinymce-config.js") 
-            script(src="/admin/js/script.js") 
+        script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js")
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js")
+        script(src="/admin/js/tinymce-config.js")
+        script(src="/admin/js/script.js")
+        block scripts

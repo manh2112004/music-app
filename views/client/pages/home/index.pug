@@ -1,39 +1,45 @@
 extends ../../layouts/default.pug
+
 block main
     .container.mt-4
         .banner.mb-4
             h1.mb-2 Music - Nghe Nhạc Trực Tuyến
             p Thế giới âm nhạc dành cho bạn
+
         h2.mt-4.mb-3.text-primary Chủ đề nổi bật
         .topic-slider
             each topic in topics
                 .topic-item
-                    .card
-                        if topic.avatar
-                            img(src=topic.avatar, alt=topic.title)
-                        .card-body.p-2
-                            h6.mt-1 #{topic.title}
+                    a(href=`/songs/${topic.slug}`)
+                        .card
+                            if topic.avatar
+                                img(src=topic.avatar, alt=topic.title)
+                            .card-body.p-2
+                                h6.mt-1 #{topic.title}
         hr
+
         h2.mt-4.mb-3.text-primary Ca sĩ yêu thích
         .singer-list
             each singer in singers
                 .singer-item
-                    .avatar
-                        if singer.avatar
-                            img(src=singer.avatar, alt=singer.fullName)
-                        else
-                            img(src="https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-9.png", alt=singer.fullName)
-                    h6.mt-2 #{singer.fullName}
+                    a
+                        .avatar
+                            if singer.avatar
+                                img(src=singer.avatar, alt=singer.fullName)
+                            else
+                                img(src="https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-9.png", alt=singer.fullName)
+                        h6.mt-2 #{singer.fullName}
         hr
+
         h2.mt-4.mb-3.text-primary Bài hát mới phát hành
         .row
             each song in songs
                 .col-md-3.mb-4
                     .card.song-card
-                        if song.avatar
-                            img.card-img-top(src=song.avatar, alt=song.title)
-                        .card-body
-                            h5.card-title #{song.title}
-                            small.text-muted #{song.listen} lượt nghe
-                            br
-                            button.btn.btn-primary.btn-sm.mt-2(onclick=`playSong('${song.slug}')`) ▶ Nghe ngay
+                        a(href=`/songs/detail/${song.slug}`)
+                            if song.avatar
+                                img.card-img-top(src=song.avatar, alt=song.title)
+                            .card-body
+                                h5.card-title #{song.title}
+                                small.text-muted #{song.listen} lượt nghe
+                        button.btn.btn-primary.btn-sm.mt-2(onclick=`playSong('${song.slug}')`) ▶ Nghe ngay
