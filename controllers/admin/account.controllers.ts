@@ -35,3 +35,12 @@ export const createPost = async (req: Request, res: Response) => {
   await newAccount.save();
   res.redirect("http://localhost:3000/admin/accounts");
 };
+export const profile = async (req: Request, res: Response) => {
+  const token = req.cookies?.token;
+  const account = await Account.findOne({ token: token });
+  console.log(account);
+  res.render("admin/pages/account/profile.pug", {
+    pageTitle: "Thông tin cá nhân",
+    account: account,
+  });
+};

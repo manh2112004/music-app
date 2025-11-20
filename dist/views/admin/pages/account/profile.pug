@@ -1,0 +1,46 @@
+extends ../../layout/default.pug
+
+block styles
+    link(rel="stylesheet", href="/admin/css/profile.css")
+
+block main
+    .container-fluid
+        .d-flex.justify-content-between.align-items-center.mb-4
+            h3.mb-0 Thông tin tài khoản
+            a.btn.btn-secondary(href=`${prefixAdmin}/dashboard`)
+                i.fa.fa-arrow-left.mr-1
+                | Quay lại
+
+        .card.shadow-sm.mt-3
+            .card-body
+                .row
+                    .col-md-4.text-center
+                        // Avatar
+                        img.img-fluid.rounded-circle.mb-3(
+                            src=account.avatar || "/admin/images/default-avatar.png",
+                            alt="Avatar",
+                            width="150",
+                            height="150"
+                        )
+                        h5.mt-2 #{account.fullName}
+                        p.text-muted #{account.status === "active" ? "Hoạt động" : "Tạm khóa"}
+
+                    .col-md-8
+                        table.table.table-borderless
+                            tr
+                                th(scope="row") Email
+                                td #{account.email}
+                            tr
+                                th(scope="row") Số điện thoại
+                                td #{account.phone || "Chưa cập nhật"}
+                            tr
+                                th(scope="row") Ngày tạo
+                                td #{new Date(account.createdAt).toLocaleString()}
+                            tr
+                                th(scope="row") Cập nhật lần cuối
+                                td #{new Date(account.updatedAt).toLocaleString()}
+
+                        // Button sửa thông tin
+                        a.btn.btn-primary.mt-3(href=`${prefixAdmin}/my-account/edit`)
+                            i.fa.fa-edit.mr-1
+                            | Chỉnh sửa

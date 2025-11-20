@@ -12,4 +12,5 @@ router.post(
   uploadSingle,
   controller.createPost
 );
+router.get("/profile", controller.profile);
 export const accountRoutes: Router = router;

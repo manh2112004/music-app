@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPost = exports.create = exports.index = void 0;
+exports.profile = exports.createPost = exports.create = exports.index = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const account_model_1 = __importDefault(require("../../models/account.model"));
 const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -52,3 +52,14 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     res.redirect("http://localhost:3000/admin/accounts");
 });
 exports.createPost = createPost;
+const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.token;
+    const account = yield account_model_1.default.findOne({ token: token });
+    console.log(account);
+    res.render("admin/pages/account/profile.pug", {
+        pageTitle: "Thông tin cá nhân",
+        account: account,
+    });
+});
+exports.profile = profile;

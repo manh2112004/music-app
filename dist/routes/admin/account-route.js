@@ -46,4 +46,5 @@ const upload = (0, multer_1.default)();
 router.get("/", controller.index);
 router.get("/create", controller.create);
 router.post("/createPost", upload.single("avatar"), uploadCloud_middleware_1.uploadSingle, controller.createPost);
+router.get("/profile", controller.profile);
 exports.accountRoutes = router;

@@ -1,0 +1,17 @@
+.card-body img.rounded-circle {
+  border: 3px solid #dee2e6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.card-body h5 {
+  font-weight: 600;
+}
+
+.table-borderless th {
+  width: 150px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  min-width: 120px;
+}
