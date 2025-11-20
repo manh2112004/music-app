@@ -1,0 +1,38 @@
+extends ../../layout/default.pug
+block main
+    .container-fluid
+        .d-flex.justify-content-between.align-items-center.mb-4
+            h3.mb-0 Quản lý tài khoản Admin
+            a.btn.btn-primary(href="/admin/account/create")
+                i.fa.fa-plus.mr-1
+                | Thêm mới
+
+        .card.shadow-sm
+            .card-body
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th # Avatar
+                            th Họ và tên
+                            th Email
+                            th SĐT
+                            th Trạng thái
+                            th Hành động
+                    tbody
+                        each account in accounts
+                            tr
+                                td
+                                    img(src=account.avatar, alt=account.fullName, width="50", height="50", class="rounded-circle")
+                                td #{account.fullName}
+                                td #{account.email}
+                                td #{account.phone || "-"}
+                                td
+                                    if account.status === 'active'
+                                        span.badge.badge-success Hoạt động
+                                    else
+                                        span.badge.badge-secondary Tạm khóa
+                                td
+                                    a.btn.btn-sm.btn-info.mr-1(href=`/admin/account/edit/${account._id}`)
+                                        i.fa.fa-edit
+                                    a.btn.btn-sm.btn-danger(href=`/admin/account/delete/${account._id}`)
+                                        i.fa.fa-trash

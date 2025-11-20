@@ -4,13 +4,13 @@ header.header
             .col-3
                 .inner-logo
                     a(href="/admin/dashboard") ADMIN
-            .col-9
-                div(class="text-right")
-                    a(
-                        href=`${prefixAdmin}/my-account`
-                        class="btn btn-primary btn-sm mr-2"
-                    )
-                    a(
-                        href=`${prefixAdmin}/auth/logout`
-                        class="btn btn-danger btn-sm"
-                    ) Đăng xuất
+            .col-9.text-right
+                a.btn.btn-primary.btn-sm.mr-2(href=`${prefixAdmin}/my-account`)
+                    i.fa.fa-user.mr-1
+                    | Tài khoản
+                a.btn.btn-warning.btn-sm.mr-2(href=`${prefixAdmin}/trash`)
+                    i.fa.fa-trash.mr-1
+                    | Thùng rác
+                a.btn.btn-danger.btn-sm(href=`${prefixAdmin}/auth/logout`)
+                    i.fa.fa-sign-out-alt.mr-1
+                    | Đăng xuất

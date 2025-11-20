@@ -6,6 +6,7 @@ import adminRoutes from "./routes/admin/index-route";
 import { systemConfig } from "./config/config";
 import path from "path";
 import methodOverride from "method-override";
+import cookieParser from "cookie-parser";
 dotenv.config();
 database.connect();
 const app: Express = express();
@@ -21,6 +22,7 @@ app.use(
   "/tinymce",
   express.static(path.join(__dirname, "node_modules", "tinymce"))
 );
+app.use(cookieParser());
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 // client routes
 clientRoutes(app);
