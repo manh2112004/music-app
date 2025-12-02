@@ -16,9 +16,17 @@ exports.topics = void 0;
 const topic_model_1 = __importDefault(require("../../models/topic.model"));
 const topics = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const topics = yield topic_model_1.default.find({ deleted: false });
+    yield Promise.all(topics.map((topic) => __awaiter(void 0, void 0, void 0, function* () {
+        const upperName = topic.title.toUpperCase();
+        if (topic.title !== upperName) {
+            topic.title = upperName;
+            yield topic.save();
+        }
+    })));
+    const updatedTopics = yield topic_model_1.default.find({ deleted: false });
     res.render("client/pages/topics/index", {
         pageTitle: "Chủ đề bài hát",
-        topics: topics,
+        topics: updatedTopics,
     });
 });
 exports.topics = topics;
