@@ -83,6 +83,7 @@ const edit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.edit = edit;
 const editPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const accountId = req.params.id;
+    const account = yield account_model_1.default.findById(accountId).select("password");
     const dataAccount = {
         fullName: req.body.fullName,
         email: req.body.email,
@@ -99,6 +100,9 @@ const editPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const passwordHas = req.body.password;
         const hashedPassword = yield bcrypt_1.default.hash(passwordHas, saltRounds);
         dataAccount.password = hashedPassword;
+    }
+    else {
+        dataAccount.password = account === null || account === void 0 ? void 0 : account.password;
     }
     yield account_model_1.default.findOne({ _id: accountId }).updateOne(dataAccount);
     res.redirect("http://localhost:3000/admin/accounts");

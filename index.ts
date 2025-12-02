@@ -7,6 +7,7 @@ import { systemConfig } from "./config/config";
 import path from "path";
 import methodOverride from "method-override";
 import cookieParser from "cookie-parser";
+// import { authClient } from "./middlewares/client/auth.middlewares";
 dotenv.config();
 database.connect();
 const app: Express = express();
@@ -23,6 +24,7 @@ app.use(
   express.static(path.join(__dirname, "node_modules", "tinymce"))
 );
 app.use(cookieParser());
+// app.use(authClient);
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 // client routes
 clientRoutes(app);

@@ -8,7 +8,7 @@ block main
         .row
             each song in songs
                 .col-6.mb-3
-                    div(class="song-item")
+                    div(class="song-item", data-slug=song.slug)
                         div(class="inner-image")
                             a(href=`/songs/detail/${song.slug}`)
                                 img(src=song.avatar)
@@ -18,4 +18,5 @@ block main
                             div(class="inner-singer") <i class="fa-solid fa-microphone-lines"></i> #{song.infoSinger.fullName}
                             div(class="inner-like") <i class="fa-solid fa-thumbs-up"></i> #{song.like}
                             div(class="inner-time") <i class="fa-regular fa-clock"></i> Hôm nay
+
                                

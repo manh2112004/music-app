@@ -61,6 +61,7 @@ export const edit = async (req: Request, res: Response) => {
 };
 export const editPost = async (req: Request, res: Response) => {
   const accountId = req.params.id;
+  const account = await Account.findById(accountId).select("password");
   const dataAccount = {
     fullName: req.body.fullName,
     email: req.body.email,
@@ -77,6 +78,8 @@ export const editPost = async (req: Request, res: Response) => {
     const passwordHas = req.body.password;
     const hashedPassword = await bcrypt.hash(passwordHas, saltRounds);
     dataAccount.password = hashedPassword;
+  } else {
+    dataAccount.password = account?.password;
   }
   await Account.findOne({ _id: accountId }).updateOne(dataAccount);
   res.redirect("http://localhost:3000/admin/accounts");

@@ -104,6 +104,7 @@ const favorite = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
             if (!exitsFavoriteSong) {
                 const record = new favorite_song_model_1.default({
+                    userId: res.locals.user._id,
                     songId: idSong,
                 });
                 yield record.save();
@@ -154,6 +155,7 @@ const miniPlayer = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const singer = yield singer_model_1.default.findById(song.singerId);
         res.json({
             code: 200,
+            id: song._id,
             title: song.title,
             singerName: (singer === null || singer === void 0 ? void 0 : singer.fullName) || "Unknown",
             audio: song.audio,

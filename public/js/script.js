@@ -10,49 +10,59 @@ if (menuToggle) {
 }
 // end menu trên mobile
 // APlayer
-const aplayer = document.querySelector("#aplayer");
-if (aplayer) {
-  let dataSong = aplayer.getAttribute("data-song");
-  dataSong = JSON.parse(dataSong);
-  let dataSinger = aplayer.getAttribute("data-singer");
-  dataSinger = JSON.parse(dataSinger);
-  const ap = new APlayer({
-    container: aplayer,
-    lrcType: 1,
-    audio: [
-      {
-        name: dataSong.title,
-        artist: dataSinger.fullName,
-        url: dataSong.audio,
-        cover: dataSong.avatar,
-        lrc: dataSong.lyrics,
-      },
-    ],
-    autoplay: true,
-  });
-  const avatar = document.querySelector(".singer-detail .inner-avatar img");
-  ap.on("play", function () {
-    avatar.style.animationPlayState = "running";
-  });
-  ap.on("pause", function () {
-    avatar.style.animationPlayState = "paused";
-  });
-  ap.on("ended", function () {
-    const link = `/songs/listen/${dataSong._id}`;
-    const option = {
-      method: "PATCH",
-    };
-    fetch(link, option)
-      .then((res) => res.json())
-      .then((data) => {
-        const elementListenSpan = document.querySelector(
-          ".singer-detail .inner-listen span"
-        );
-        elementListenSpan.innerHTML = `${data.listen} Lượt nghe`;
-      });
-  });
-}
+// const aplayer = document.querySelector("#aplayer");
+// if (aplayer) {
+//   let dataSong = aplayer.getAttribute("data-song");
+//   dataSong = JSON.parse(dataSong);
+//   let dataSinger = aplayer.getAttribute("data-singer");
+//   dataSinger = JSON.parse(dataSinger);
+//   const ap = new APlayer({
+//     container: aplayer,
+//     lrcType: 1,
+//     audio: [
+//       {
+//         name: dataSong.title,
+//         artist: dataSinger.fullName,
+//         url: dataSong.audio,
+//         cover: dataSong.avatar,
+//         lrc: dataSong.lyrics,
+//       },
+//     ],
+//     autoplay: true,
+//   });
+//   const avatar = document.querySelector(".singer-detail .inner-avatar img");
+//   ap.on("play", function () {
+//     avatar.style.animationPlayState = "running";
+//   });
+//   ap.on("pause", function () {
+//     avatar.style.animationPlayState = "paused";
+//   });
+//   ap.on("ended", function () {
+//     const link = `/songs/listen/${dataSong._id}`;
+//     const option = {
+//       method: "PATCH",
+//     };
+//     fetch(link, option)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const elementListenSpan = document.querySelector(
+//           ".singer-detail .inner-listen span"
+//         );
+//         elementListenSpan.innerHTML = `${data.listen} Lượt nghe`;
+//       });
+//   });
+// }
 // APlayer
+// mini player
+const songItems = document.querySelectorAll(".song-item");
+songItems.forEach((item) => {
+  item.addEventListener("click", async (e) => {
+    const slug = item.getAttribute("data-slug");
+    if (slug) {
+      await playSong(slug);
+    }
+  });
+});
 // button like
 const buttonLike = document.querySelector("[button-like]");
 if (buttonLike) {

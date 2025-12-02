@@ -1,0 +1,35 @@
+doctype html
+html(lang="vi")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Đăng nhập
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+    body
+        .container
+            .row.justify-content-center
+                .col-md-6
+                    h2.text-center.mt-5 Đăng nhập tài khoản
+                    if errorMessage
+                        .alert.alert-danger.mt-3 #{errorMessage}
+                    form(action="/users/loginPost" method="POST")
+                        .mb-3
+                            label(for="email" class="form-label") Email
+                            input#email.form-control(type="email" name="email" placeholder="Nhập email" required)
+
+                        .mb-3
+                            label(for="password" class="form-label") Mật khẩu
+                            input#password.form-control(type="password" name="password" placeholder="Nhập mật khẩu" required)
+
+                        .mb-3.form-check
+                            input#remember.form-check-input(type="checkbox" name="remember")
+                            label.form-check-label(for="remember") Ghi nhớ đăng nhập
+
+                        button.btn.btn-primary.w-100(type="submit") Đăng nhập
+
+                    p.text-center.mt-3
+                        | Chưa có tài khoản? 
+                        a(href="/users/register") Đăng ký ngay
+
+                    p.text-center
+                        a(href="/forgot-password") Quên mật khẩu?

@@ -1,0 +1,74 @@
+extends ../../layouts/default.pug
+
+block styles
+    link(rel="stylesheet", href="/css/playlist-detail.css")
+
+block main
+    .container.mt-4
+        .playlist-header.d-flex.mb-4
+            .thumbnail
+                if playlist.image
+                    img(src=playlist.image, alt=playlist.title)
+                else
+                    img(src="https://via.placeholder.com/300x300?text=Playlist", alt="Playlist")
+            .info.ml-4
+                h2.text-black.font-weight-bold #{playlist.title}
+                small.text-muted #{playlist.tracks.length || 0} bài hát • 
+                    if playlist.tracks && playlist.tracks.length
+                        - var artists = playlist.tracks.map(t => t.artist || "Không rõ").join(", ")
+                        | #{artists}
+
+                .actions.mt-3
+                    button.btn.btn-success.btn-lg.rounded-pill(onclick=`playPlaylist('${playlist._id}')`)
+                        i.fa-solid.fa-play.mr-2
+                        | Phát tất cả
+                    .dropdown.d-inline.ml-2
+                        button.btn.btn-outline-secondary.btn-lg.rounded-pill.dropdown-toggle(
+                            type="button",
+                            id="playlistMenu",
+                            data-toggle="dropdown",
+                            aria-haspopup="true",
+                            aria-expanded="false"
+                        )
+                            i.fa-solid.fa-ellipsis
+                        ul.dropdown-menu(aria-labelledby="playlistMenu")
+                            li
+                                a.dropdown-item(href=`/playlists/add-songs/${playlist._id}`)
+                                    i.fa-solid.fa-plus.mr-2
+                                    | Add songs
+                            li
+                                a.dropdown-item(href=`/playlists/set-private/${playlist._id}`)
+                                    i.fa-solid.fa-lock.mr-2
+                                    | Set as private
+                            li
+                                a.dropdown-item(href=`/playlists/edit/${playlist._id}`)
+                                    i.fa-solid.fa-pen.mr-2
+                                    | Edit playlist
+                            li
+                                button.dropdown-item#deletePlaylistBtn(type="button")
+                                    i.fa-solid.fa-trash.mr-2
+                                    | Delete playlist
+        hr
+        if playlist.tracks && playlist.tracks.length
+            table.table.table-hover.playlist-tracks.text-white
+                thead
+                    tr
+                        th #
+                        th Title
+                        th Uploader
+                        th Artist
+                        th Duration
+                tbody
+                    each track, index in playlist.tracks
+                        tr
+                            td #{index + 1}
+                            td #{track.title || track}
+                            td #{track.uploader || "Không rõ"}
+                            td #{track.artist || "Không rõ"}
+                            td #{track.duration || "--:--"}
+        else
+            .text-center.text-muted.mt-5
+                p Chưa có bài hát nào trong playlist này.
+
+block scripts
+    script(src="/js/playlist.js")

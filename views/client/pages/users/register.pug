@@ -1,0 +1,36 @@
+doctype html
+html(lang="vi")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Đăng ký tài khoản
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+    body
+        .container
+            .row.justify-content-center
+                .col-md-6
+                    h2.text-center.mt-5 Đăng ký tài khoản
+                    if errorMessage
+                        .alert.alert-danger.mt-3 #{errorMessage}
+                    form(action="/users/registerPost" method="POST")
+                        .mb-3
+                            label(for="name" class="form-label") Họ và tên
+                            input#name.form-control(type="text" name="name" placeholder="Nhập họ và tên" required)
+
+                        .mb-3
+                            label(for="email" class="form-label") Email
+                            input#email.form-control(type="email" name="email" placeholder="Nhập email" required)
+
+                        .mb-3
+                            label(for="password" class="form-label") Mật khẩu
+                            input#password.form-control(type="password" name="password" placeholder="Nhập mật khẩu" required)
+
+                        .mb-3
+                            label(for="confirmPassword" class="form-label") Xác nhận mật khẩu
+                            input#confirmPassword.form-control(type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu" required)
+
+                        button.btn.btn-primary.w-100(type="submit") Đăng ký
+
+                    p.text-center.mt-3
+                        | Bạn đã có tài khoản? 
+                        a(href="/users/login") Đăng nhập ngay

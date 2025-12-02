@@ -3,23 +3,21 @@ let isShuffle = false;
 let isRepeat = false;
 let playlist = [];
 let currentSongSlug = "";
-
 async function playSong(slug, songs = []) {
   const res = await fetch(`/songs/miniPlayer/${slug}`);
   const data = await res.json();
-
   const song = {
+    _id: data.id,
     title: data.title,
     singer: data.singerName,
     audio: data.audio,
     avatar: data.avatar,
     slug: slug,
   };
-
+  console.log(songs);
   playlist = songs.length ? songs : [song];
   currentSongIndex = playlist.findIndex((s) => s.slug === slug);
   currentSongSlug = slug;
-
   loadMiniPlayer(song);
   saveCurrentSong(false);
 }
@@ -33,7 +31,6 @@ function loadMiniPlayer(song) {
   const playBtn = document.getElementById("miniPlayerPlay");
   const progress = document.getElementById("miniPlayerProgress");
   const volume = document.getElementById("miniPlayerVolume");
-
   avatar.src =
     song.avatar ||
     "https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-9.png";
@@ -88,17 +85,25 @@ function loadMiniPlayer(song) {
     saveCurrentSong(false);
   };
 
-  audio.onended = () => {
-    if (isRepeat) {
-      audio.currentTime = 0;
-      audio.play();
-    } else {
-      nextSong();
-    }
+  audio.onended = async () => {
+    const link = `/songs/listen/${song._id}`;
+    const option = {
+      method: "PATCH",
+    };
+    fetch(link, option)
+      .then((response) => response.json())
+      .then((data) => {
+        const elementListenSpan = document.querySelector(
+          ".singer-detail .inner-listen span"
+        );
+        elementListenSpan.innerHTML = `${data.listen} Lượt nghe`;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   miniPlayer.classList.remove("hidden");
-
   document.getElementById("miniPlayerClose").onclick = () => {
     miniPlayer.classList.add("hidden");
     audio.pause();
@@ -150,17 +155,16 @@ window.addEventListener("DOMContentLoaded", async () => {
     isShuffle = saved.isShuffle;
     isRepeat = saved.isRepeat;
     currentSongSlug = saved.slug;
-
     const res = await fetch(`/songs/miniPlayer/${saved.slug}`);
     const data = await res.json();
     const song = {
+      _id: data.id,
       title: data.title,
       singer: data.singerName,
       audio: data.audio,
       avatar: data.avatar,
       slug: saved.slug,
     };
-
     loadMiniPlayer(song);
     const audio = document.getElementById("miniPlayerAudio");
     audio.currentTime = saved.currentTime || 0;

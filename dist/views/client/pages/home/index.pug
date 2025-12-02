@@ -30,16 +30,33 @@ block main
                                 img(src="https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-9.png", alt=singer.fullName)
                         h6.mt-2 #{singer.fullName}
         hr
-
         h2.mt-4.mb-3.text-primary Bài hát mới phát hành
         .row
             each song in songs
                 .col-md-3.mb-4
-                    .card.song-card
-                        a(href=`/songs/detail/${song.slug}`)
+                    .card.song-card.position-relative
+                        a(href=`/songs/detail/${song.slug}`, onclick=`playSong('${song.slug}')`)
                             if song.avatar
                                 img.card-img-top(src=song.avatar, alt=song.title)
                             .card-body
                                 h5.card-title #{song.title}
                                 small.text-muted #{song.listen} lượt nghe
-                        button.btn.btn-primary.btn-sm.mt-2(onclick=`playSong('${song.slug}')`) ▶ Nghe ngay
+                                button.btn.btn-primary.btn-sm.mt-2(
+                                    onclick=`playSong('${song.slug}')`
+                                ) ▶ Nghe ngay
+                        .position-absolute(style="bottom: 10px; right: 10px;")
+                            button.btn.btn-outline-success.btn-sm.mr-1(
+                                type="button",
+                                onclick=`addToPlaylist('${song.slug}')`,
+                                title="Thêm playlist"
+                            )
+                                i.fa-solid.fa-plus
+                            button.btn.btn-outline-danger.btn-sm(
+                                type="button",
+                                class=("inner-action inner-heart " + (song.isFavoriteSong ? "active" : "")),
+                                button-favorite=song.id,
+                                title="Yêu thích"
+                            )
+                                i.fa-solid.fa-heart(class=(song.isFavoriteSong ? "text-danger" : ""))
+
+

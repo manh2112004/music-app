@@ -94,7 +94,7 @@ export const favorite = async (req: Request, res: Response) => {
       });
       if (!exitsFavoriteSong) {
         const record = new FavoriteSong({
-          // userId: "",
+          userId: res.locals.user._id,
           songId: idSong,
         });
         await record.save();
@@ -145,6 +145,7 @@ export const miniPlayer = async (req: Request, res: Response) => {
     const singer = await Singer.findById(song.singerId);
     res.json({
       code: 200,
+      id: song._id,
       title: song.title,
       singerName: singer?.fullName || "Unknown",
       audio: song.audio,
